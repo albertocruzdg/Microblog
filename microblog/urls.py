@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'microblog.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^posts/', include('posts.urls', namespace='posts')),
     url(r'^admin/', include(admin.site.urls)),
 )

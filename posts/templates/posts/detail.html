@@ -1,0 +1,16 @@
+<h1>{{ post.text }}</h1>
+
+<ul>
+{% for comment in post.comment_set.all %}
+    <li>{{comment.user}}: {{ comment.text }}</li>
+{% endfor %}
+</ul>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'posts:comment' post.id %}" method="post">
+{% csrf_token %}
+	<label for="comment">Comment</label>
+	<textarea type="text" name="comment" id="comment"></textarea>
+	<input type="submit" value="send">
+</form>

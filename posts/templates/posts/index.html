@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+</head>
+<body>
+	<h1>Posts recientes</h1>
+	<section>
+	{% if lastest_post_list %}
+		{% for post in lastest_post_list %}
+			<article>
+				<h2><a href="{% url 'posts:detail' post.id%}">{{post.text}}</a></h2>
+			</article>
+		{% endfor %}
+	{% else %}
+		<p>No hay ningun post.</p>
+	{% endif %}
+	</section>
+</body>
+</html>
