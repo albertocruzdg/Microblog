@@ -6,6 +6,13 @@
 </head>
 <body>
 	<h1>Posts recientes</h1>
+	<form action="{% url 'posts:post' %}" method="post">
+	{% csrf_token %}
+		<label for="text">Post</label>
+		<textarea name="text" id="text" cols="30" rows="10"></textarea>
+		<input type="submit" value="send">
+	</form>
+
 	<section>
 	{% if lastest_post_list %}
 		{% for post in lastest_post_list %}
