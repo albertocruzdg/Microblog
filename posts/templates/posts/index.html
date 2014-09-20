@@ -2,25 +2,37 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Index</title>
-	<link rel="stylesheet" href="../../static/css/estilos.css">
+	<title>Microblog</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-	<h1>Posts recientes</h1>
-	<form action="{% url 'posts:post' %}" method="post">
-	{% csrf_token %}
-		<label for="text">Post</label>
-		<textarea name="text" id="text" cols="30" rows="10"></textarea>
-		<input type="submit" value="send">
-	</form>
-
-	<section>
+	<section class="NewPost">
+		<form class="NewPost-form" action="{% url 'posts:post' %}" method="post">
+		{% csrf_token %}
+			<h2 class="NewPost-title">NUEVO <span class="green-text">POST</span></h2>
+			<div>
+				<textarea class="NewPost-text" name="text" id="text" placeholder="Escribe un nuevo post."></textarea>
+			</div>
+			<div>
+				<input class="NewPost-button button" type="submit" value="Enviar">
+			</div>
+		</form>
+	</section>
+	<section class="Posts">
+		<h2 class="Post-title">POSTS <span class="green-text">RECIENTES</span></h2>
 	{% if lastest_post_list %}
+		<div class="Post-container">
 		{% for post in lastest_post_list %}
-			<article>
-				<h2><a href="{% url 'posts:detail' post.id%}">{{post.text}}</a></h2>
+			<article class="Post-item">
+				<h3 class="Post-user">{{ post.user.get_full_name }}</h3>
+				<p class="Post-text">{{ post.text }}</p>
+				<p class="Post-date">{{ post.date }}</p>
+				<a href="{% url 'posts:detail' post.id%}" class="Post-detail button">Ver detalle</a>
 			</article>
 		{% endfor %}
+		</div>
 	{% else %}
 		<p>No hay ningun post.</p>
 	{% endif %}

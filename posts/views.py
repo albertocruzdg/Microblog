@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from .models import Post
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -10,6 +11,7 @@ def index(request):
 	context={'lastest_post_list' : lastest_post_list}
 	return render(request,'posts/index.html',context)
 
+@login_required
 def post(request):
 	p=Post(
 		user=request.user,
